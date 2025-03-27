@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\ShootSimulatorGame.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{44DE0C87-BD06-45CA-A8B2-48854694F566}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\ShootSimulatorGame.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\ShootSimulatorGameEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{813C3057-7FED-43A9-93CF-E78B86C04F35}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\ShootSimulatorGame">
+      <UniqueIdentifier>{A0CB6BC9-A79A-49B4-B927-A09F57F1AFA6}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\ShootSimulatorGame\ShootSimulatorGame.Build.cs">
+      <Filter>Source\ShootSimulatorGame</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\ShootSimulatorGame\ShootSimulatorGame.cpp">
+      <Filter>Source\ShootSimulatorGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootSimulatorGame\ShootSimulatorGame.h">
+      <Filter>Source\ShootSimulatorGame</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootSimulatorGame\ShootSimulatorGameCharacter.cpp">
+      <Filter>Source\ShootSimulatorGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootSimulatorGame\ShootSimulatorGameCharacter.h">
+      <Filter>Source\ShootSimulatorGame</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootSimulatorGame\ShootSimulatorGameGameMode.cpp">
+      <Filter>Source\ShootSimulatorGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootSimulatorGame\ShootSimulatorGameGameMode.h">
+      <Filter>Source\ShootSimulatorGame</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootSimulatorGame\ShootSimulatorGameHUD.cpp">
+      <Filter>Source\ShootSimulatorGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootSimulatorGame\ShootSimulatorGameHUD.h">
+      <Filter>Source\ShootSimulatorGame</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootSimulatorGame\ShootSimulatorGameProjectile.cpp">
+      <Filter>Source\ShootSimulatorGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootSimulatorGame\ShootSimulatorGameProjectile.h">
+      <Filter>Source\ShootSimulatorGame</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
