@@ -1,2 +1,0 @@
-C:\Users\lucho\Documents\Unreal Projects\ShootSimulator\ShootSimulatorGame\Intermediate\Build\Win64\UE4Editor\Development\ShootSimulatorGame\Definitions.ShootSimulatorGame.h
-C:\Users\lucho\Documents\Unreal Projects\ShootSimulator\ShootSimulatorGame\Source\ShootSimulatorGame\ShootSimulatorGame.h
