@@ -3,6 +3,7 @@
 #include "ShootSimulatorGameProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "Interfaces/Damageable.h"
 
 AShootSimulatorGameProjectile::AShootSimulatorGameProjectile() 
 {
@@ -34,9 +35,34 @@ AShootSimulatorGameProjectile::AShootSimulatorGameProjectile()
 void AShootSimulatorGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	// Only add impulse and destroy projectile if we hit a physics
-	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
 	{
-		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+		if(OtherComp->IsSimulatingPhysics())
+			OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+		
+		
+			IDamageable* DamageableActor = Cast<IDamageable>(OtherActor);
+			if (DamageableActor)
+			{
+				DamageableActor->TakeDamage(damageAmount);
+				UE_LOG(LogTemp, Warning, TEXT("Inside Make damage"), damageAmount);
+			}
+			else 
+			{
+				// If the actor doesn't implement IDamageable, check its components
+				TArray<UActorComponent*> Components;
+				OtherActor->GetComponents(Components);
+
+				for (UActorComponent* Component : Components)
+				{
+					IDamageable* DamageableComponent = Cast<IDamageable>(Component);
+					if (DamageableComponent)
+					{
+						DamageableComponent->TakeDamage(damageAmount);
+						break; // Exit the loop once we find a damageable component
+					}
+				}
+			}
 
 		Destroy();
 	}

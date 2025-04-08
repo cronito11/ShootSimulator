@@ -21,6 +21,8 @@ class AShootSimulatorGameProjectile : public AActor
 	/** Projectile movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	UProjectileMovementComponent* ProjectileMovement;
+protected :
+	float damageAmount = 10.0f;
 
 public:
 	AShootSimulatorGameProjectile();
