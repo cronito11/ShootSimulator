@@ -2,6 +2,7 @@
 
 #include "ShootSimulatorGameGameMode.h"
 #include "ShootSimulatorGameHUD.h"
+#include "ScoreManager.h"
 #include "ShootSimulatorGameCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 

@@ -2,6 +2,7 @@
 
 
 #include "Target.h"
+#include "EngineUtils.h" // Include the header for TActorIterator
 
 // Sets default values for this component's properties
 UTarget::UTarget()
@@ -19,8 +20,13 @@ void UTarget::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	// Find the GameManager in the world
+	for (TActorIterator<AGameManager> It(GetWorld()); It; ++It)
+	{
+		scoreManager = *It;
+		break;
+	}
+	scoreManager->AddTarget();	
 }
 
 
@@ -28,14 +34,14 @@ void UTarget::BeginPlay()
 void UTarget::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+	//UE_LOG(LogTemp, Warning, TEXT("Target Remind %s"), scoreManager);
 	// ...
 }
 
 void UTarget::TakeDamage(float damageAmount)
 {
 	GetOwner()->Destroy();
+	scoreManager->RemoveTarget();
 	// Implement damage logic here
-	UE_LOG(LogTemp, Warning, TEXT("Target took %f damage"), damageAmount);
 }
 

@@ -14,10 +14,11 @@ class SHOOTSIMULATORGAME_API AScoreManager : public AGameModeBase
 {
 	GENERATED_BODY()
 public:
-	int32 targets = 0;
 
 	void AddTarget();
 	void RemoveTarget();
 protected:
+	int32 targets = 0;
+
 	void UpdateHUD();
 };

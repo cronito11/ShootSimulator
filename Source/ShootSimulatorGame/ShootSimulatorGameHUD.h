@@ -20,6 +20,6 @@ public:
 private:
 	/** Crosshair asset pointer */
 	class UTexture2D* CrosshairTex;
-
+	class AGameManager* GameManager;
 };
 

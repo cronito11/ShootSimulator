@@ -17,5 +17,5 @@ void AScoreManager::RemoveTarget()
 
 void AScoreManager::UpdateHUD()
 {
-	//ScoreText->SetText(FString::Printf(TEXT("%d"), NewScore));
+	UE_LOG(LogTemp, Warning, TEXT("Target Remind %s"), targets);
 }
