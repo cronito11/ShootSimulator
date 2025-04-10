@@ -10,16 +10,23 @@ UCLASS()
 class AShootSimulatorGameHUD : public AHUD
 {
 	GENERATED_BODY()
-
+protected:
+	virtual void PostInitializeComponents() override;
 public:
 	AShootSimulatorGameHUD();
 
 	/** Primary draw call for the HUD */
 	virtual void DrawHUD() override;
 
+	UFUNCTION(BlueprintCallable, Category = "UI")
+	UGamePlayUI* GetGamePlayUI() const { return GamePlayUI; }
 private:
 	/** Crosshair asset pointer */
 	class UTexture2D* CrosshairTex;
 	class AGameManager* GameManager;
+	TSubclassOf<UUserWidget> GamePlayUIClass;
+	UGamePlayUI* GamePlayUI;
+
+
 };
 

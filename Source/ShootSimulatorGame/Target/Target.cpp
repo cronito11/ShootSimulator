@@ -26,7 +26,12 @@ void UTarget::BeginPlay()
 		scoreManager = *It;
 		break;
 	}
-	scoreManager->AddTarget();	
+	if (!scoreManager)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("GameManager not found!"));
+		return;
+	}
+	//scoreManager->AddTarget();
 }
 
 

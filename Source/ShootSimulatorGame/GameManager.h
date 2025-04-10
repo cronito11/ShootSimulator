@@ -17,7 +17,8 @@ protected:
 	virtual void BeginPlay() override;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Scene")
 	FString NextLevel;
-	int32 TargetCount = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Targets")
+	int32 TargetCount = 14;
 	double Timer = 0.0;
 	void UpdateUI();
 	void UpdateTimer();

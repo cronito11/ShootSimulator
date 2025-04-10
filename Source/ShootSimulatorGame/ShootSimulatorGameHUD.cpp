@@ -7,15 +7,33 @@
 #include "CanvasItem.h"
 #include "EngineUtils.h" // Include the header for TActorIterator
 #include "GameManager.h"
+#include "UI/GamePlayUI.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Blueprint/UserWidget.h"
+
 
 AShootSimulatorGameHUD::AShootSimulatorGameHUD()
 {
 	// Set the crosshair texture
 	static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshairTexObj(TEXT("/Game/FirstPerson/Textures/FirstPersonCrosshair"));
+	static ConstructorHelpers::FClassFinder<UUserWidget> CrosshairHUDObj(TEXT("/Game/UIs/GamePlayUI"));
 	CrosshairTex = CrosshairTexObj.Object;
+	GamePlayUIClass = CrosshairHUDObj.Class;
 }
 
+void AShootSimulatorGameHUD::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	if (GamePlayUIClass)
+	{
+		GamePlayUI = CreateWidget<UGamePlayUI>(GetWorld(), GamePlayUIClass);
+		if (GamePlayUI)
+		{
+			GamePlayUI->AddToViewport();
+		}
+	}
+}
 
 void AShootSimulatorGameHUD::DrawHUD()
 {
@@ -35,6 +53,9 @@ void AShootSimulatorGameHUD::DrawHUD()
 	FCanvasTileItem TileItem( CrosshairDrawPosition, CrosshairTex->Resource, FLinearColor::White);
 	TileItem.BlendMode = SE_BLEND_Translucent;
 	Canvas->DrawItem( TileItem );
+
+
+	
 	/*
 
 	// Get the GameManager instance

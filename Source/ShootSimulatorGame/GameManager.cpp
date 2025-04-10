@@ -6,10 +6,11 @@
 #include "Kismet/GameplayStatics.h"
 
 
-#include "Kismet/GameplayStatics.h"
 #include "Blueprint/UserWidget.h"
 
 #include "UI/GamePlayUI.h"
+#include "ShootSimulatorGameHUD.h"
+#include "EngineUtils.h" // Include the header for TActorIterator
 
 
 // Sets default values
@@ -20,27 +21,28 @@ AGameManager::AGameManager()
 
 }
 
-UPROPERTY()
-UUserWidget* GameplayUIInstance;
-
 UGamePlayUI* GamePlayUI;
 
 // Called when the game starts or when spawned
 void AGameManager::BeginPlay()
 {
 	Super::BeginPlay();
+	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 
-
-	UE_LOG(LogTemp, Warning, TEXT("GamePlayUIClass: %d"), GamePlayUIClass);
-	if (GamePlayUIClass)
+	UE_LOG(LogTemp, Warning, TEXT("PC: %d"), PC);
+	if (PC)
 	{
-		GamePlayUI = CreateWidget<UGamePlayUI>(GetWorld(), GamePlayUIClass);
-		if (GamePlayUI)
+		AShootSimulatorGameHUD* HUD = Cast<AShootSimulatorGameHUD>(PC->GetHUD());
+
+		UE_LOG(LogTemp, Warning, TEXT("HUD: %d"), HUD);
+		if (HUD)
 		{
-			GamePlayUI->AddToViewport();
-			UpdateUI();
+			GamePlayUI = HUD->GetGamePlayUI();
+			UE_LOG(LogTemp, Warning, TEXT("GamePlayUI: %d"), GamePlayUI);
 		}
 	}
+
+	UpdateUI();
 }
 
 // Called every frame
@@ -63,7 +65,7 @@ void AGameManager::AddTarget()
 void AGameManager::RemoveTarget()
 {
 	TargetCount--;
-	if (TargetCount == 0)
+	if (TargetCount <= 0)
 		ChangeLevel();
 	else
 		UpdateUI();
@@ -83,7 +85,8 @@ void AGameManager::UpdateTimer()
 
 void AGameManager::UpdateUI()
 {
-	if (!GamePlayUI || LevelFinished)
+	UE_LOG(LogTemp, Warning, TEXT("GamePlayUI: %d"), GamePlayUI);
+	if (!GamePlayUI)
 		return;
 	GamePlayUI->UpdateTargetCount(TargetCount);
 	
@@ -91,12 +94,10 @@ void AGameManager::UpdateUI()
 
 void AGameManager::ChangeLevel()
 {
-	if (LevelFinished)
-		return;
 	// Specify the name of the level you want to load
 	FName LevelName = FName(NextLevel);  // Replace with the level's name
 
 	// Load the new level
 	LevelFinished = true;
-	//UGameplayStatics::OpenLevel(GetWorld(), LevelName);
+	UGameplayStatics::OpenLevel(GetWorld(), LevelName);
 }
