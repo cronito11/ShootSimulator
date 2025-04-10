@@ -35,7 +35,7 @@ void AShootSimulatorGameHUD::DrawHUD()
 	FCanvasTileItem TileItem( CrosshairDrawPosition, CrosshairTex->Resource, FLinearColor::White);
 	TileItem.BlendMode = SE_BLEND_Translucent;
 	Canvas->DrawItem( TileItem );
-
+	/*
 
 	// Get the GameManager instance
 	if (!GameManager)
@@ -63,6 +63,7 @@ void AShootSimulatorGameHUD::DrawHUD()
 		// Draw main text
 		//Canvas->DrawText(GEngine->GetLargeFont(), TargetCountText, TextPosition.X, TextPosition.Y, 1.0f, TextColor);
 	}
+	*/
 
 
 }

@@ -10,21 +10,30 @@ UCLASS()
 class SHOOTSIMULATORGAME_API AGameManager : public AActor
 {
 	GENERATED_BODY()
-	
+private:
+	bool LevelFinished;
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Scene")
+	FString NextLevel;
+	int32 TargetCount = 0;
+	double Timer = 0.0;
+	void UpdateUI();
+	void UpdateTimer();
+	void ChangeLevel();
+
 public:	
 	// Sets default values for this actor's properties
 	AGameManager();
 	void AddTarget();
 	void RemoveTarget();
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-	int32 TargetCount = 0;
-
-public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	int GetTargetCount();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+	TSubclassOf<UUserWidget> GamePlayUIClass;
+
 
 };
