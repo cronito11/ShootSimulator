@@ -5,7 +5,7 @@
 
 #include "Kismet/GameplayStatics.h"
 
-
+#include "ShootingGameInstance.h" // Include the header for UShootingGameInstance
 #include "Blueprint/UserWidget.h"
 
 #include "UI/GamePlayUI.h"
@@ -34,11 +34,9 @@ void AGameManager::BeginPlay()
 	{
 		AShootSimulatorGameHUD* HUD = Cast<AShootSimulatorGameHUD>(PC->GetHUD());
 
-		UE_LOG(LogTemp, Warning, TEXT("HUD: %d"), HUD);
 		if (HUD)
 		{
 			GamePlayUI = HUD->GetGamePlayUI();
-			UE_LOG(LogTemp, Warning, TEXT("GamePlayUI: %d"), GamePlayUI);
 		}
 	}
 
@@ -85,7 +83,6 @@ void AGameManager::UpdateTimer()
 
 void AGameManager::UpdateUI()
 {
-	UE_LOG(LogTemp, Warning, TEXT("GamePlayUI: %d"), GamePlayUI);
 	if (!GamePlayUI)
 		return;
 	GamePlayUI->UpdateTargetCount(TargetCount);
@@ -99,5 +96,23 @@ void AGameManager::ChangeLevel()
 
 	// Load the new level
 	LevelFinished = true;
+	// Access the custom GameInstance
+	if (UShootingGameInstance* SGI = Cast<UShootingGameInstance>(GetGameInstance()))
+	{
+		// Example usage: setting time for level 0
+		SGI->SetLevelTime(Timer); // or whatever logic you want
+		if(Finished)
+		{
+			// Save the game state or perform any other necessary actions
+			SGI->FinishLevels();
+		}
+		UE_LOG(LogTemp, Warning, TEXT("Found"));
+
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Not Found"));
+	}
+
 	UGameplayStatics::OpenLevel(GetWorld(), LevelName);
 }

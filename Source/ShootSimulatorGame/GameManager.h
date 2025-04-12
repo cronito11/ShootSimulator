@@ -17,6 +17,8 @@ protected:
 	virtual void BeginPlay() override;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Scene")
 	FString NextLevel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Scene")
+	bool Finished = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Targets")
 	int32 TargetCount = 14;
 	double Timer = 0.0;
