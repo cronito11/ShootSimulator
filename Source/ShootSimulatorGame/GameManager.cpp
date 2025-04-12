@@ -101,17 +101,11 @@ void AGameManager::ChangeLevel()
 	{
 		// Example usage: setting time for level 0
 		SGI->SetLevelTime(Timer); // or whatever logic you want
-		if(Finished)
+		if(NextLevel == "GameOver")
 		{
 			// Save the game state or perform any other necessary actions
 			SGI->FinishLevels();
 		}
-		UE_LOG(LogTemp, Warning, TEXT("Found"));
-
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Not Found"));
 	}
 
 	UGameplayStatics::OpenLevel(GetWorld(), LevelName);
