@@ -73,12 +73,18 @@ int AGameManager::GetTargetCount()
 {
 	return TargetCount;
 }
-
+float const MAX_TIME = 300;
 void AGameManager::UpdateTimer()
 {
 	if (!GamePlayUI || LevelFinished)
 		return;
-	GamePlayUI->UpdateTimer(Timer);
+	if (Timer > MAX_TIME)
+	{
+		UGameplayStatics::OpenLevel(GetWorld(), "GameOver_2");
+		LevelFinished = true;
+		return;
+	}
+	GamePlayUI->UpdateTimer(MAX_TIME-Timer);
 }
 
 void AGameManager::UpdateUI()

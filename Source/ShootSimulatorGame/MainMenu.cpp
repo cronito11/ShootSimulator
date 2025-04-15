@@ -4,13 +4,16 @@
 #include "MainMenu.h"
 #include "MainMenuHUD.h"
 #include "GameoverHUD.h"
+#include "AGameoverLostHUD.h"
 #include "Kismet/GameplayStatics.h"
 AMainMenu::AMainMenu()
 {
-	if(UGameplayStatics::GetCurrentLevelName(this) == "MainMenu")
-		HUDClass = AMainMenuHUD::StaticClass();
-	else
+	if(UGameplayStatics::GetCurrentLevelName(this) == "GameOver_2")
+		HUDClass = AAGameoverLostHUD::StaticClass(); // Default to AAGameoverLostHUD if not in MainMenu or GameOver
+	else if (UGameplayStatics::GetCurrentLevelName(this) == "GameOver")
 		HUDClass = AGameoverHUD::StaticClass();
+    else
+		HUDClass = AMainMenuHUD::StaticClass();
 }
 
 void AMainMenu::BeginPlay()
